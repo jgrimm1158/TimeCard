@@ -1,0 +1,5 @@
+%h1= "Time Card for week starting #{@card.week_starting.strftime("%B %d, %Y")}" 
+- @disabled = true  
+= render :partial => 'form'
+
+= link_to 'Show all', cards_path

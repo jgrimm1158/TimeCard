@@ -1,0 +1,16 @@
+%p
+  %div
+    %b Name:
+    = @user.first_name + ' ' + @user.last_name
+  
+  %div
+    %b Email:
+    = @user.email
+
+  %div
+    %b Login:
+    = @user.login
+
+= link_to 'Edit', edit_user_path(@user)
+\|
+= link_to 'Back', users_path

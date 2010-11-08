@@ -1,0 +1,42 @@
+= form_for @card do |f|
+  
+  %table
+    %th Date
+    - if current_user.exempt
+      %th Worked
+      %th PTO
+      %th Half PTO
+      %th Did not Work
+    - else
+      %th Hours Worked
+      %th Hours PTO
+    %th Paid Holiday
+    %th Notes
+    = f.fields_for :days do |builder|
+      %tr
+        %td 
+          = builder.label :days, builder.object.date.strftime("%A %m/%d") 
+        - if current_user.exempt
+          %td 
+            = builder.radio_button :worked, :worked
+          %td
+            = builder.radio_button :worked, :pto
+          %td 
+            = builder.radio_button :worked, :half_pto
+          %td
+            = builder.radio_button :worked, :did_not_work
+          %td
+            = builder.radio_button :worked, :paid_holiday
+        - else
+          %td
+            = builder.number_field :hours_worked
+          %td
+            = builder.number_field :hours_pto
+          %td
+            = builder.check_box :worked, {:checked => builder.object.worked.to_s == "paid_holiday"}, "paid_holiday", "worked" 
+        %td
+          = builder.text_area :notes, :rows => 1
+          = link_to_function "Clear", "clear_fields(this)"
+  -if not @disabled
+    = submit_tag "Save", :name => 'save'
+    = submit_tag "Submit", :name => 'submit'
