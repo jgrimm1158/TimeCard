@@ -12,7 +12,7 @@
 ActiveRecord::Schema.define(:version => 20101108054202) do
 
   create_table "cards", :force => true do |t|
-    t.integer  "user_id"
+    t.references :user
     t.boolean  "isSubmitted"
     t.boolean  "isApproved"
     t.datetime "created_at"
@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(:version => 20101108054202) do
     t.integer  "hours_pto",    :default => 0
     t.string   "worked_cd",    :default => "did_not_work"
     t.string   "notes"
-    t.integer  "card_id"
+    t.references  :card
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "departments", :force => true do |t|
     t.string   "name"
-    t.integer  "manager_id"
+    t.references :manager
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(:version => 20101108054202) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "login"
-    t.boolean  "manager",             :default => false
-    t.integer  "department"
+    t.boolean  "isManager",           :default => false
+    t.references  :department
   end
 
 end

@@ -6,13 +6,28 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 User.delete_all
-betsy = User.create(:first_name => 'Betsy', :last_name => 'Gordon', :login => 'betsy', :password => 'pw', :exempt => true, :manager => true)
+
+def create_user (first, last, dept, exempt = true)
+  user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'pass', :password_confirmation => 'pass', :exempt => exempt, :email => "#{first}@twoamsoftware.com", :department => dept)
+  puts user.errors
+  user
+end 
+ 
+betsy = User.create(:first_name => 'Betsy', :last_name => 'Gordon', :login => 'betsy', :password => 'pass', :exempt => true, :email => 'betsy@twoamsoftware.com', :isManager => true)
+brian = User.create(:first_name => 'Brian', :last_name => 'Artman', :login => 'brian', :password => 'pass', :exempt => true, :email => 'brian@twoamsoftware.com', :isManager => true)
 
 Department.delete_all
 dev = Department.create(:name => 'Development', :manager => betsy)
-betsy.deparment = dev
+betsy.department = dev
 betsy.save
 
-rich = User.create(:first_name => 'Rich', :last_name => 'Catalano', :login => 'rich', :password => 'pw', :exempt => true, :manager => true)
+qa = Department.create(:name => 'QA', :manager => brian)
+brian.department = qa
+brian.save
 
 
+rich = create_user('Rich', 'Catalano', dev)
+mark = create_user('Mark', 'Barber', dev)
+jon = create_user('Jon', 'Willesen', dev)
+dave = create_user('Dave', 'White', dev)
+jared = create_user('Jared', 'Pitchford', dev, false)

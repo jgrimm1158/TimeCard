@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :cards, :dependent => :destroy
-  has_one :departments
+  belongs_to :department
+  
   has_one :manager, :through => :department
   
   validates :first_name,  :presence => true
