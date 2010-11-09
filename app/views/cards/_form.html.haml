@@ -1,5 +1,5 @@
 = form_for @card do |f|
-  
+  = f.hidden_field :week_starting
   %table
     %th Date
     - if current_user.exempt
@@ -40,3 +40,4 @@
   -if not @disabled
     = submit_tag "Save", :name => 'save'
     = submit_tag "Submit", :name => 'submit'
+    

@@ -1,8 +1,8 @@
 TimeCard::Application.routes.draw do |map|
   resources :users
   resources :cards
-
-  get    'home(.:format)'   => 'cards#index',           :as => :home
+  
+  get    'home(.:format)'   => 'cards#index',          :as => :home
   get    'login(.:format)'  => 'user_session#new',     :as => :login
   post   'login(.:format)'  => 'user_session#create',  :as => :login
   delete 'logout(.:format)' => 'user_session#destroy', :as => :logout
