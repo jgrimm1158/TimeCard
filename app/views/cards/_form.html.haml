@@ -4,39 +4,35 @@
     %th Date
     - if current_user.exempt
       %th Worked
-      %th PTO
-      %th Half PTO
-      %th Did not Work
     - else
       %th Hours Worked
       %th Hours PTO
-    %th Paid Holiday
+      %th Paid Holiday
     %th Notes
     = f.fields_for :days do |builder|
+      = builder.hidden_field :date
       %tr
-        %td 
+        %td
           = builder.label :days, builder.object.date.strftime("%A %m/%d") 
         - if current_user.exempt
-          %td 
-            = builder.radio_button :worked, :worked
+          - options = [["Worked", :worked],
+                      ["PTO", :pto],
+                      ["Half PTO", :half_pto],
+                      ["Did Not Work", :did_not_work],
+                      ["Paid Holiday", :paid_holiday]]
           %td
-            = builder.radio_button :worked, :pto
-          %td 
-            = builder.radio_button :worked, :half_pto
-          %td
-            = builder.radio_button :worked, :did_not_work
-          %td
-            = builder.radio_button :worked, :paid_holiday
+            = builder.select :worked, options, {}, {:disabled => @disabled}
         - else
           %td
-            = builder.number_field :hours_worked
+            = builder.number_field :hours_worked, :disabled => @disabled
           %td
-            = builder.number_field :hours_pto
+            = builder.number_field :hours_pto, :disabled => @disabled
           %td
-            = builder.check_box :worked, {:checked => builder.object.worked.to_s == "paid_holiday"}, "paid_holiday", "worked" 
+            = builder.check_box :worked, {:checked => builder.object.worked.to_s == "paid_holiday", :disabled => @disabled}, "paid_holiday", "worked" 
         %td
-          = builder.text_area :notes, :rows => 1
-          = link_to_function "Clear", "clear_fields(this)"
+          = builder.text_area :notes, :rows => 1, :disabled => @disabled
+          -unless @disabled
+            = link_to_function "Clear", "clear_fields(this)", :disabled => @disabled
   -if not @disabled
     = submit_tag "Save", :name => 'save'
     = submit_tag "Submit", :name => 'submit'

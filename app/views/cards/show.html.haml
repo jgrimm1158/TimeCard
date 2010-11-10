@@ -1,5 +1,5 @@
 %h1= "Time Card for week starting #{@card.week_starting.strftime("%B %d, %Y")}" 
-- @disabled = true  
+- @disabled = @card.isSubmitted  
 = render :partial => 'form'
 
-= link_to 'Show all', cards_path
+= link_to 'Show all', :action => 'show', :controller => 'users', :id => current_user.login

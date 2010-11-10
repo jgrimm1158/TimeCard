@@ -2,14 +2,21 @@
   %div
     %b Name:
     = @user.first_name + ' ' + @user.last_name
-  
   %div
     %b Email:
     = @user.email
-
   %div
     %b Login:
     = @user.login
+  %div
+    %b Department:
+    = @user.department.name
+    - if(@user.manager)
+      (Manager)
+
+%h1 My Cards!
+- @cards.each do |card|
+  %li= link_to card.week_starting, card
 
 = link_to 'Edit', edit_user_path(@user)
 \|

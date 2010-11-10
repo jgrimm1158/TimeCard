@@ -13,8 +13,8 @@ ActiveRecord::Schema.define(:version => 20101108054202) do
 
   create_table "cards", :force => true do |t|
     t.references :user
-    t.boolean  "isSubmitted"
-    t.boolean  "isApproved"
+    t.boolean  "isSubmitted", :default => false
+    t.boolean  "isApproved", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "week_starting"

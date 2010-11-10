@@ -13,11 +13,13 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.xml
+  # GET /users/login
+  # GET /users/login.xml
   def show
-    @user = User.find(params[:id])
-    redirect_to "/home"
+    redirect_to(:controller => 'user_session', :action => 'destroy') and return unless current_user.login == params[:id]
+    @user = current_user
+    @cards = @user.cards
+    redirect_to(:controller => 'cards', :action => 'new') and return unless @cards.count > 0
   end
 
   # GET /users/new

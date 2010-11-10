@@ -1,10 +1,8 @@
 class CardsController < ApplicationController
   
   def index
-    @cards = current_user.cards
-    redirect_to(:action => 'new') and return unless @cards.count > 0
     respond_to do |format|
-      format.html # show.html.haml
+      format.html
     end
   end
   
@@ -32,7 +30,8 @@ class CardsController < ApplicationController
   def create
     @card = current_user.cards.create(params[:card])
     submit() unless params[:submit].nil?
-    redirect_to(:action => 'index')
+    login = current_user.login
+    redirect_to :action => 'show', :id => login, :controller => 'users', :format => params[:format]
   end
   
   def show

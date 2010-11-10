@@ -6,7 +6,6 @@ class UserSessionController < ApplicationController
   # GET /login.xml
   def new
     @user_session = UserSession.new
-
     respond_to do |format|
       format.html # new.html.haml
       format.xml  { render :xml => @user_session }
@@ -19,7 +18,8 @@ class UserSessionController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = "Successfully logged in."
-      redirect_to home_path, :format => params[:format]
+      login = @user_session.user.login
+      redirect_to :action => 'show', :id => login, :controller => 'users', :format => params[:format]
     else
       render :action => 'new', :format => params[:format]
     end
