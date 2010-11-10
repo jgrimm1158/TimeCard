@@ -11,7 +11,7 @@
   %div
     %b Department:
     = @user.department.name
-    - if(@user.manager)
+    - if(@user.isManager)
       (Manager)
 
 %h1 My Cards!
