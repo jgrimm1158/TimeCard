@@ -45,17 +45,17 @@ class CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     if @card.update_attributes(params[:card])
+      flash[:notice] = "Card for #{params[:week_starting]} successfully updated."
       submit() unless params[:submit].nil?
-      respond_to do |format|
-        format.html
-      end
+      redirect_to :action => :show, :controller => :users, :id => current_user.login
     end
   end
 
   def submit
+    manager = current_user.manager
     @card.isSubmitted = true;
     @card.save
     UserMailer.card_submitted(@card).deliver
-    @submitted = true
+    flash[:notice] = "Card for #{params[:week_starting]} has been submitted to your manager, #{manager.first_name} #{manager.last_name}."
   end
 end
