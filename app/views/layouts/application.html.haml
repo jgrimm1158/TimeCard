@@ -1,0 +1,17 @@
+%head
+  %title TimeCard
+  = stylesheet_link_tag :all
+  = javascript_include_tag :all
+  = csrf_meta_tag
+
+%body
+
+%p
+  - if current_user
+    = "Hello, #{current_user.first_name}! ("
+    = link_to 'Not you?', logout_path, :method => :delete
+    = ")" 
+- flash.each do |key, msg|
+  = content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}"
+
+= yield
