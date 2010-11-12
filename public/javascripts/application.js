@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("button, input:submit, a").button();
-	$(".notice.message ").addClass('ui-state-highlight');
+	$(".notice.message, #cardAlert").addClass('ui-state-highlight');
 	$(".alert.message").addClass('ui-state-alert');
 	setTimeout(function(){
 		$(".message").slideUp();

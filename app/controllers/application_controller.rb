@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   private
+    def go_home
+      redirect_to :action => :show, :controller => :users, :id => current_user.login
+    end
+    
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
@@ -18,7 +22,7 @@ class ApplicationController < ActionController::Base
     def require_user
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
+        flash[:error] = "You must be logged in to access this page"
         redirect_to login_url
         return false
       end
@@ -27,8 +31,8 @@ class ApplicationController < ActionController::Base
     def require_no_user
       if current_user
         store_location
-        flash[:notice] = "You must be logged out to access this page"
-        redirect_to users_url # TODO: change this to the main page
+        flash[:error] = "You must be logged out to access this page"
+        redirect_to root_url
         return false
       end
     end

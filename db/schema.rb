@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20101108054202) do
     t.string   "login"
     t.boolean  "isManager",           :default => false
     t.references  :department
+    t.references  :manager
   end
 
 end

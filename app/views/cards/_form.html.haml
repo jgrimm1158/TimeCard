@@ -16,19 +16,22 @@
           = builder.label :days, builder.object.date.strftime("%A %m/%d") 
         - if current_user.exempt
           - options = [["Worked", :worked],
-                      ["PTO", :pto],
-                      ["Half PTO", :half_pto],
-                      ["Did Not Work", :did_not_work],
-                      ["Paid Holiday", :paid_holiday]]
+                      ["PTO", :PTO],
+                      ["Half PTO", :Half_PTO],
+                      ["Did Not Work", :Did_Not_Work],
+                      ["Paid Holiday", :Paid_Holiday]]
           %td
-            = builder.select :worked, options, {}, {:disabled => @disabled}
+            - if @disabled
+              = builder.object.worked.to_s.gsub /_/, ' '
+            - else
+              = builder.select :worked, options, {}, {:disabled => @disabled}
         - else
           %td
             = builder.number_field :hours_worked, :disabled => @disabled
           %td
             = builder.number_field :hours_pto, :disabled => @disabled
           %td
-            = builder.check_box :worked, {:checked => builder.object.worked.to_s == "paid_holiday", :disabled => @disabled}, "paid_holiday", "worked" 
+            = builder.check_box :worked, {:checked => builder.object.worked.to_s == "Haid_Holiday", :disabled => @disabled}, "Paid_Holiday", "worked" 
         %td
           = builder.text_area :notes, :rows => 1, :disabled => @disabled
           -unless @disabled

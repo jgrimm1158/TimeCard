@@ -6,6 +6,9 @@ TimeCard::Application.routes.draw do |map|
   post   'login(.:format)'  => 'user_session#create',  :as => :login
   delete 'logout(.:format)' => 'user_session#destroy', :as => :logout
   get    'logout(.:format)' => 'user_session#destroy', :as => :logout
+  get    'manager(.:format)' => 'manager#index',       :as => :manager
+  get    'manager/show(.:format)' => 'manager#show'
+  get    'manager/approve(.:format)' => 'manager#approve'
 
   root :to => 'user_session#new' # login page
 
