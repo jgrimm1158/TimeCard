@@ -1,9 +1,9 @@
 $(document).ready(function(){
 	$("button, input:submit, a").button();
-	$(".notice.message ").dialog({position: 'top', dialogClass: 'ui-state-highlight'});
-	$(".alert.message").dialog({position: 'top', dialogClass: 'ui-state-alert'});
+	$(".notice.message ").addClass('ui-state-highlight');
+	$(".alert.message").addClass('ui-state-alert');
 	setTimeout(function(){
-		$(".message").dialog('destroy');
+		$(".message").slideUp();
 	}, 5000)
 });
 
