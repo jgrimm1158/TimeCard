@@ -15,11 +15,7 @@
         %td
           = builder.label :days, builder.object.date.strftime("%A %m/%d") 
         - if current_user.exempt
-          - options = [["Worked", :worked],
-                      ["PTO", :PTO],
-                      ["Half PTO", :Half_PTO],
-                      ["Did Not Work", :Did_Not_Work],
-                      ["Paid Holiday", :Paid_Holiday]]
+          - options = [["Worked", :Worked], ["PTO", :PTO], ["Half PTO", :Half_PTO], ["Did Not Work", :Did_Not_Work], ["Paid Holiday", :Paid_Holiday]]
           %td
             - if @disabled
               = builder.object.worked.to_s.gsub /_/, ' '
