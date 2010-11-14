@@ -18,6 +18,8 @@ dev = Department.create(:name => 'Development')
 qa = Department.create(:name => 'QA')
 
 User.delete_all
+Card.delete_all
+Day.delete_all
 
 rich = create_user('Rich', 'Catalano', dev)
 mark = create_user('Mark', 'Barber', dev)
