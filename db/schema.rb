@@ -9,31 +9,43 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101108054202) do
+ActiveRecord::Schema.define(:version => 20101114054155) do
 
   create_table "cards", :force => true do |t|
-    t.references :user
-    t.boolean  "isSubmitted", :default => false
-    t.boolean  "isApproved", :default => false
+    t.boolean  "isSubmitted",   :default => false
+    t.boolean  "isApproved",    :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "week_starting"
+    t.boolean  "isExempt",      :default => false
+    t.integer  "user_id"
   end
 
   create_table "days", :force => true do |t|
     t.date     "date"
-    t.integer  "hours_worked", :default => 0
-    t.integer  "hours_pto",    :default => 0
-    t.string   "worked_cd",    :default => "did_not_work"
     t.string   "notes"
-    t.references  :card
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
+    t.integer  "card_id"
   end
 
   create_table "departments", :force => true do |t|
     t.string   "name"
-    t.references :manager
+    t.integer  "manager_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "exempt_days", :force => true do |t|
+    t.string   "worked",        :default => :worked
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hourly_days", :force => true do |t|
+    t.integer  "hours_worked", :default => 0
+    t.integer  "hours_PTO",    :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20101108054202) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "login"
+    t.integer  "manager_id"
     t.boolean  "isManager",           :default => false
-    t.references  :department
-    t.references  :manager
+    t.integer  "department_id"
   end
 
 end
