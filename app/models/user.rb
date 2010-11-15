@@ -1,16 +1,22 @@
-class User < ActiveRecord::Base
-  has_many :cards, :dependent => :destroy
-  belongs_to :department
+class User
+  include Mongoid::Document         
+  devise :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable
   
-  has_one :manager, :through => :department
+  # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+  field :name
+  validates_presence_of :name
+  validates_uniqueness_of :name, :email, :case_sensitive => false
+  attr_accessible :name, :email, :password, :password_confirmation
+ 
+  # Assocations :::::::::::::::::::::::::::::::::::::::::::::::::::::
+  # belongs_to :department
+  # embeds_many :cards
+  # embeds_one :model
   
-  validates :first_name,  :presence => true
-  validates :last_name,  :presence => true
-  validates :login,  :presence => true
-  validates :email, :presence => true, :uniqueness => true, :email_format => true
+  # Callbacks ::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+  # before_create :your_model_method
+  # after_create :your_model_method
+  # before_update :your_model_method
   
-  acts_as_authentic do |c|
-    c.login_field = :login
-    c. validate_login_field = false # There is no login field, so don't validate it
-  end
 end

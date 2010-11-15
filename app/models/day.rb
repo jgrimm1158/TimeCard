@@ -1,3 +1,3 @@
-class Day < ActiveRecord::Base
-  belongs_to :card
-end
+# class Day < ActiveRecord::Base
+#   belongs_to :card
+# end                                    

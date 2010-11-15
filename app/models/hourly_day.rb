@@ -1,2 +1,3 @@
-class HourlyDay < Day
-end
+# class HourlyDay < Day
+# end
+#                                                                                            

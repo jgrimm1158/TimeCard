@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101114054155) do
+ActiveRecord::Schema.define(:version => 20101114060732) do
 
   create_table "cards", :force => true do |t|
     t.boolean  "isSubmitted",   :default => false
@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(:version => 20101114054155) do
   end
 
   create_table "exempt_days", :force => true do |t|
-    t.string   "worked",        :default => :worked
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "worked"
   end
 
   create_table "hourly_days", :force => true do |t|

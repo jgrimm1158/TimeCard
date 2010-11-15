@@ -1,5 +1,7 @@
 = form_for @card do |f|
   = f.hidden_field :week_starting
+  = f.hidden_field :isSubmitted
+  = f.hidden_field :isApproved
   %table
     %th Date
     - if current_user.exempt
@@ -32,7 +34,9 @@
           = builder.text_area :notes, :rows => 1, :disabled => @disabled
           -unless @disabled
             = link_to_function "Clear", "clear_fields(this)", :disabled => @disabled
-  -if not @disabled
+  - if not @disabled
     = submit_tag "Save", :name => 'save'
     = submit_tag "Submit", :name => 'submit'
+  - else
+    
     

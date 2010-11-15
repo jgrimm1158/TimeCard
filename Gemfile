@@ -1,26 +1,25 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.beta4'
-gem 'mysql2'
+gem 'rails', '3.0.0'
+gem 'mongoid', '2.0.0.beta.19'
+gem 'bson_ext', '1.1.2'
+gem 'devise', '1.1.3'
+gem "devise_ldap_authenticatable", :git => "git://github.com/dpmcnevin/devise_ldap_authenticatable", :branch => "rails3"
+# uncomment the next line if you wish to deploy to Heroku
+# gem 'heroku', '1.11.0'
+# uncomment the following lines if you wish to use Haml
+gem 'haml', '3.0.22'
+gem 'haml-rails', '0.3.4', :group => :development
+# the folowing gems are used to generate Devise views for Haml
+gem 'hpricot', '0.8.2', :group => :development
+gem 'ruby_parser', '2.0.5', :group => :development
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-# Add support for haml as well as erb
-gem 'haml'
 
 # Add support for Authlogic authentication
-gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => 'rails3' # TODO: test this with official version of authlogic
+# gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => 'rails3' # TODO: test this with official version of authlogic
 
 # Add support for paperclip (used for uploading content and profile pics)
 # gem 'paperclip'
-
-# Add S3 support for attaching files with paperclip
-# gem 'aws-s3', :require => 'aws/s3'
-# gem 'right_aws'
-
-# Add support for sqlite3 for dev and test DBs
-gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :development do
   # Add additional generators for Rails in the development environment
