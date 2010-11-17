@@ -1,18 +1,17 @@
 class User
   include Mongoid::Document         
-  devise :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable
+  devise :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable, :validatable
   
   # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
   field :name
-  validates_presence_of :name
-  validates_uniqueness_of :name, :email, :case_sensitive => false
-  attr_accessible :name, :email, :password, :password_confirmation
+  validates_presence_of :login
+  validates_uniqueness_of :login, :email, :case_sensitive => false
+  attr_accessible :first_name, :last_name, :email, :login, :exempt, :department, :password, :password_confirmation
  
   # Assocations :::::::::::::::::::::::::::::::::::::::::::::::::::::
-  # belongs_to :department
-  # embeds_many :cards
-  # embeds_one :model
+  referenced_in :department
+  embeds_many :cards
   
   # Callbacks ::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
   # before_create :your_model_method

@@ -1,4 +1,6 @@
 TimeCard::Application.routes.draw do |map|
+  devise_for :managers
+
   devise_for :users
 
   resources :users
@@ -12,7 +14,7 @@ TimeCard::Application.routes.draw do |map|
   get    'manager/show(.:format)' => 'manager#show'
   get    'manager/approve(.:format)' => 'manager#approve'
 
-  root :to => 'user_session#new' # login page
+  root :to => 'users#index' # login page
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

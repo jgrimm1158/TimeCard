@@ -7,31 +7,24 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 def create_user (first, last, dept, exempt = true)
-  user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'pass', :password_confirmation => 'pass', :exempt => exempt, :email => "#{first}@twoamsoftware.com", :department => dept)
-  user
-end 
+  user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :exempt => exempt, :email => "#{first}@twoamsoftware.com", :department => dept)
+end
 
-Department.delete_all
+def create_manager (first, last, dept)
+  mgr = Manager.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :exempt => true, :email => "#{first}@twoamsoftware.com", :department => dept)
+  dept.manager = mgr
+end 
+ 
 
 dev = Department.create(:name => 'Development')
 
 qa = Department.create(:name => 'QA')
-
-User.delete_all
-Card.delete_all
-Day.delete_all
 
 rich = create_user('Rich', 'Catalano', dev)
 mark = create_user('Mark', 'Barber', dev)
 jon = create_user('Jon', 'Willesen', dev)
 dave = create_user('Dave', 'White', dev)
 jared = create_user('Jared', 'Pitchford', dev, false)
-betsy = create_user('Betsy', 'Gordon', dev)
-betsy.isManager = true
-dev.manager = betsy
-betsy.save
 
-brian = create_user('Brian', 'Artman', qa)
-brian.isManager = true
-qa.manager = brian
-brian.save
+betsy = create_manager('Betsy', 'Gordon', dev)
+brian = create_manager('Brian', 'Artman', qa)
