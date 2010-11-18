@@ -8,11 +8,11 @@
   %div
     %b Login:
     = @user.login
-  %div
-    %b Department:
-    = @user.department.name
-    - if(@user.isManager)
-      (Manager)
+  / %div
+  /   %b Department:
+  /   = @user.department.name
+  /   - if(@user.class == Manager)
+  /     (Manager)
 
 %h1 My Cards!
 - @cards.each do |card|

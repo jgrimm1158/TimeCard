@@ -4,7 +4,9 @@ class User
   
   # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-  field :name
+  field :login
+  field :first_name
+  field :last_name
   validates_presence_of :login
   validates_uniqueness_of :login, :email, :case_sensitive => false
   attr_accessible :first_name, :last_name, :email, :login, :exempt, :department, :password, :password_confirmation

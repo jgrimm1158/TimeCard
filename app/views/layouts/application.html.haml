@@ -10,7 +10,7 @@
 
 %p
   - if current_user
-    - if current_user.isManager and not controller.controller_name == 'manager'
+    - if current_user.class == Manager and not controller.controller_name == 'manager'
       - count = Card.where(:isSubmitted => true, :isApproved => false, :user_id => User.where(:department_id => current_user.department).all).all.count
       - if count > 0
         #cardAlert
