@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:new, :create]
 
-  # GET /users
-  # GET /users.xml
   def index
     @users = User.all
 
@@ -13,13 +11,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/login
-  # GET /users/login.xml
   def show 
-    redirect_to(request.referer) and return unless current_user.id.to_s == params[:id]
+    if not current_user 
+      redirect_to(request.referer)
+      return
+    end
     @user = current_user
     @cards = @user.cards
-    # redirect_to(:controller => 'cards', :action => 'new') and return unless @cards.count > 0
+    redirect_to(:controller => 'cards', :action => 'new') and return unless @cards.count > 0
   end
 
   # GET /users/new

@@ -1,6 +1,6 @@
 class User
   include Mongoid::Document         
-  devise :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login, :email]
   
   # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 

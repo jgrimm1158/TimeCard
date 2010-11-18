@@ -6,15 +6,11 @@ TimeCard::Application.routes.draw do |map|
   resources :users
   resources :cards
   
-  get    'login(.:format)'  => 'user_session#new',     :as => :login
-  post   'login(.:format)'  => 'user_session#create',  :as => :login
-  delete 'logout(.:format)' => 'user_session#destroy', :as => :logout
-  get    'logout(.:format)' => 'user_session#destroy', :as => :logout
-  get    'manager(.:format)' => 'manager#index',       :as => :manager
-  get    'manager/show(.:format)' => 'manager#show'
-  get    'manager/approve(.:format)' => 'manager#approve'
+  # devise_for :users, :path_names => { :sign_up => "register", :sign_in => "/login", :sign_out => "/logout" } 
+  
+  get    'home(.:format)' => 'users#show', :as => :home
 
-  root :to => 'users#index' # login page
+  root :to => 'users#show' # login page
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
