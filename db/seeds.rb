@@ -5,17 +5,20 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+def mailer_set_url_options
+  ActionMailer::Base.default_url_options[:host] = request.host_with_port
+end 
 
-def create_user (first, last, dept, exempt = true)
-  user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :exempt => exempt, :email => "#{first}@twoamsoftware.com", :department => dept)
+def create_user (first, last, dept, is_exempt = true)
+  user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => is_exempt, :email => "richcatalano@me.com", :department => dept)
 end
 
 def create_manager (first, last, dept)
-  mgr = Manager.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :exempt => true, :email => "#{first}@twoamsoftware.com", :department => dept)
+  mgr = Manager.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => true, :email => "richcatalano@me.com", :department => dept)
   dept.manager = mgr
 end 
  
-
+User.delete_all
 dev = Department.create(:name => 'Development')
 
 qa = Department.create(:name => 'QA')

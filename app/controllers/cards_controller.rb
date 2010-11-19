@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
-  
+  before_filter :authenticate_user!
+
   def index
     @cards = current_user.cards
     respond_to do |format|
@@ -10,19 +11,10 @@ class CardsController < ApplicationController
   def new
     today = Date.today
     monday = today.beginning_of_week
-    @card = current_user.cards.find_by_week_starting monday
-    if @card.nil?
-      @card = current_user.cards.new(:week_starting => monday)
-    end
-    @days = [] 
-    monday.step(today.end_of_week - 2) do |date|
-       day = @card.days.find_by_date date
-       if day.nil?
-         day = @card.days.new(:date => date)
-       end
-       @days << day
-    end
-    @card.days = @days
+    puts monday.class
+    cards = current_user.is_exempt ? current_user.exempt_cards : current_user.hourly_cards
+    @card = cards.find_or_initialize_by(:week_starting => monday, :user => current_user)
+    @card.create_days
     respond_to do |format|
       format.html
     end
