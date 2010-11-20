@@ -4,7 +4,8 @@ class Day
   embedded_in :card, :inverse_of => :days
   
   field :date, :type => Date
-  field :card
+  field :notes
   
+  validates_uniqueness_of :date
   
 end                                    

@@ -28,18 +28,18 @@ class CardsController < ApplicationController
   end
   
   def show
-    @card = Card.find(params[:id])
+    @card = current_user.exempt_cards.find(params[:id]) or current_user.hourly_cards.find(params[:id])
     respond_to do |format|
       format.html 
     end
   end
   
   def update
-    @card = Card.find(params[:id])
+    @card = current_user.exempt_cards.find(params[:id]) or current_user.hourly_cards.find(params[:id])
     if @card.update_attributes(params[:card])
       flash[:notice] = "Card for #{params[:week_starting]} successfully updated."
       submit() unless params[:submit].nil?
-      go_home()
+      redirect_to :user
     end
   end
 

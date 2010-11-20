@@ -18,6 +18,6 @@
           = link_to "#{split[0]} #{split[1]}", manager_path
           = "#{split[2]} your approval."  
     = "Hello, #{current_user.first_name}! ("
-    = link_to 'Not you?', logout_path, :method => :delete
+    = link_to 'Not you?', '/users/sign_out'
     = ")"
 = yield

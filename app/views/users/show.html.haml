@@ -16,7 +16,7 @@
 
 %h1 My Cards!
 - @cards.each do |card|
-  %li= link_to card.week_starting, card
+  %li= link_to card.week_starting, :controller => :cards, :action => :show, :id => card.id	
 
 = link_to 'Edit', edit_user_path(@user)
 \|

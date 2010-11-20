@@ -1,0 +1,2 @@
+class ExemptCardsController < CardsController
+end

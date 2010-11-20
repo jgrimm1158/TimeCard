@@ -4,23 +4,23 @@
   = f.hidden_field :isApproved
   %table
     %th Date
-    - if current_user.exempt
+    - if @card.class == ExemptCard
       %th Worked
     - else
       %th Hours Worked
       %th Hours PTO
       %th Paid Holiday
     %th Notes
-    = f.fields_for :days do |builder|
-      = builder.hidden_field :date
+    - f.fields_for :exempt_days do |builder|
       %tr
-        %td
-          = builder.label :days, builder.object.date.strftime("%A %m/%d") 
-        - if current_user.exempt
-          - options = [["Worked", :Worked], ["PTO", :PTO], ["Half PTO", :Half_PTO], ["Did Not Work", :Did_Not_Work], ["Paid Holiday", :Paid_Holiday]]
+        = builder.hidden_field :date
+        - if builder.object.class == ExemptDay
+          - options = ["Worked", "PTO", "Half PTO", "Did Not Work", "Paid Holiday"]
+          %td
+            = builder.label :days, builder.object.date.strftime("%A %m/%d") 
           %td
             - if @disabled
-              = builder.object.worked.to_s.gsub /_/, ' '
+              = builder.object.worked.to_s
             - else
               = builder.select :worked, options, {}, {:disabled => @disabled}
         - else
@@ -29,14 +29,14 @@
           %td
             = builder.number_field :hours_pto, :disabled => @disabled
           %td
-            = builder.check_box :worked, {:checked => builder.object.worked.to_s == "Haid_Holiday", :disabled => @disabled}, "Paid_Holiday", "worked" 
+            = builder.check_box :worked, {:checked => builder.object.worked.to_s == "Paid Holiday", :disabled => @disabled}, "Paid_Holiday", "worked" 
         %td
           = builder.text_area :notes, :rows => 1, :disabled => @disabled
-          -unless @disabled
+          - unless @disabled
             = link_to_function "Clear", "clear_fields(this)", :disabled => @disabled
   - if not @disabled
-    = submit_tag "Save", :name => 'save'
+    = submit_tag "Save", :name => 'save', :controller => :cards
     = submit_tag "Submit", :name => 'submit'
   - else
-    
-    
+
+
