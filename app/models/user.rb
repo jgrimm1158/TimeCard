@@ -21,9 +21,18 @@ class User
  
   # Assocations :::::::::::::::::::::::::::::::::::::::::::::::::::::
   referenced_in :department
-  embeds_many :hourly_cards
-  embeds_many :exempt_cards
-  
+  embeds_many :cards do
+    def exempt
+      @target.select do |card|
+        card.isExempt == true
+      end
+    end
+    def hourly
+      @target.select do |card|
+        card.isExempt == false
+      end
+    end
+  end
   # Callbacks ::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
   # before_create :your_model_method
   # after_create :your_model_method

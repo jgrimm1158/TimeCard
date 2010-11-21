@@ -5,6 +5,7 @@ class Day
   
   field :date, :type => Date
   field :notes
+  field :worked, :default => "Worked"
   
   validates_uniqueness_of :date
   

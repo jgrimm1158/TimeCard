@@ -1,19 +1,20 @@
 = form_for @card do |f|
   = f.hidden_field :week_starting
-  = f.hidden_field :isSubmitted
-  = f.hidden_field :isApproved
+  = f.hidden_field :is_submitted
+  = f.hidden_field :is_approved
   %table
     %th Date
-    - if @card.class == ExemptCard
+    - if @card.is_exempt
       %th Worked
     - else
       %th Hours Worked
       %th Hours PTO
       %th Paid Holiday
     %th Notes
-    - f.fields_for :exempt_days do |builder|
+    - f.fields_for :days do |builder|
       %tr
         = builder.hidden_field :date
+        - puts builder.object
         - if builder.object.class == ExemptDay
           - options = ["Worked", "PTO", "Half PTO", "Did Not Work", "Paid Holiday"]
           %td
@@ -35,7 +36,7 @@
           - unless @disabled
             = link_to_function "Clear", "clear_fields(this)", :disabled => @disabled
   - if not @disabled
-    = submit_tag "Save", :name => 'save', :controller => :cards
+    = submit_tag "Save", :name => 'save'
     = submit_tag "Submit", :name => 'submit'
   - else
 

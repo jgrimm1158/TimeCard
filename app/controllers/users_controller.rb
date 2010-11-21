@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       return
     end
     @user = current_user
-    @cards = @user.exempt_cards + @user.hourly_cards
+    @cards = @user.cards
     redirect_to(:controller => 'cards', :action => 'new') and return unless @cards.count > 0
   end
 

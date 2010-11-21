@@ -12,8 +12,8 @@ class CardsController < ApplicationController
     today = Date.today
     monday = today.beginning_of_week
     puts monday.class
-    cards = current_user.is_exempt ? current_user.exempt_cards : current_user.hourly_cards
-    @card = cards.find_or_initialize_by(:week_starting => monday, :user => current_user)
+    @user = current_user
+    @card = @user.cards.find_or_initialize_by(:week_starting => monday, :user => @user, :is_exempt => @user.is_exempt)
     @card.create_days
     respond_to do |format|
       format.html
@@ -28,14 +28,14 @@ class CardsController < ApplicationController
   end
   
   def show
-    @card = current_user.exempt_cards.find(params[:id]) or current_user.hourly_cards.find(params[:id])
+    @card = current_user.cards.find(params[:id])
     respond_to do |format|
       format.html 
     end
   end
   
   def update
-    @card = current_user.exempt_cards.find(params[:id]) or current_user.hourly_cards.find(params[:id])
+    @card = current_user.cards.find(params[:id])
     if @card.update_attributes(params[:card])
       flash[:notice] = "Card for #{params[:week_starting]} successfully updated."
       submit() unless params[:submit].nil?
