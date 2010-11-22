@@ -2,9 +2,9 @@ class Card
   include Mongoid::Document
   
   field :week_starting, :type => Date
-  field :is_submitted
-  field :is_approved
-  field :is_exempt
+  field :is_submitted, :type => Boolean, :default => false
+  field :is_approved, :type => Boolean, :default => false
+  field :is_exempt, :type => Boolean, :default => false
   embeds_many :days
   embedded_in :user, :inverse_of => :cards
   accepts_nested_attributes_for :days

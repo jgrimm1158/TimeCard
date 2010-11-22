@@ -1,5 +1,4 @@
 TimeCard::Application.routes.draw do |map|
-  devise_for :managers
   devise_for :users
 
   resources :users

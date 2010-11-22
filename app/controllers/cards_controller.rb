@@ -44,10 +44,10 @@ class CardsController < ApplicationController
   end
 
   def submit
-    manager = current_user.manager
-    @card.isSubmitted = true;
+    @manager = current_user.department.manager
+    @card.is_submitted = true;
     @card.save
     UserMailer.card_submitted(@card).deliver
-    flash[:notice] = "Card for #{params[:week_starting]} has been submitted to your manager, #{manager.first_name} #{manager.last_name}."
+    flash[:notice] = "Card for #{params[:week_starting]} has been submitted to your manager, #{@manager.first_name} #{@manager.last_name}."
   end
 end

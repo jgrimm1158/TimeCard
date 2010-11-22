@@ -5,16 +5,18 @@ class User
   def self.find_for_database_authentication(conditions)
     value = conditions[authentication_keys.first]
     self.any_of({ :login => value }, { :email => value }).first
-  end
+  end 
   
-  # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
-
   field :login
   field :first_name
   field :last_name
-  field :exempt_cards
-  field :hourly_cards
-  field :is_exempt
+  field :cards
+  field :is_exempt, :type => Boolean
+  field :department
+  key :first_name, :last_name
+  # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
   validates_presence_of :login
   validates_uniqueness_of :login, :case_sensitive => false
   attr_accessible :first_name, :last_name, :email, :login, :is_exempt, :department, :password, :password_confirmation

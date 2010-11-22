@@ -10,15 +10,18 @@ def mailer_set_url_options
 end 
 
 def create_user (first, last, dept, is_exempt = true)
-  user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => is_exempt, :email => "richcatalano@me.com", :department => dept)
+  user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => is_exempt, :email => "richcatalano@me.com")
+  dept.users << user
 end
 
 def create_manager (first, last, dept)
-  mgr = Manager.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => true, :email => "richcatalano@me.com", :department => dept)
+  mgr = Manager.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => true, :email => first.downcase + last.downcase + "@twoamsoftware.com")
   dept.manager = mgr
+  dept.save
 end 
  
 User.delete_all
+Department.delete_all
 dev = Department.create(:name => 'Development')
 
 qa = Department.create(:name => 'QA')
