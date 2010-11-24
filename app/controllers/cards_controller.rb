@@ -13,7 +13,8 @@ class CardsController < ApplicationController
     monday = today.beginning_of_week
     puts monday.class
     @user = current_user
-    @card = @user.cards.find_or_initialize_by(:week_starting => monday, :user => @user, :is_exempt => @user.is_exempt)
+    @card = Card.find_or_initialize_by(:week_starting => monday, :user_id => @user.id, :is_exempt => @user.is_exempt)
+    @user.cards << @card
     @card.create_days
     respond_to do |format|
       format.html
@@ -44,7 +45,7 @@ class CardsController < ApplicationController
   end
 
   def submit
-    @manager = current_user.department.manager
+    @manager = current_user.manager
     @card.is_submitted = true;
     @card.save
     UserMailer.card_submitted(@card).deliver

@@ -115,7 +115,6 @@ describe UsersController do
 
   describe "when a user is authenticated" do
     before(:each) do
-      activate_authlogic
       UserSession.create Factory.build(:user)
     end
 

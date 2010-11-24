@@ -1,6 +1,6 @@
 class User
   include Mongoid::Document         
-  devise :database_authenticatable, :confirmable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   
   def self.find_for_database_authentication(conditions)
     value = conditions[authentication_keys.first]
@@ -12,28 +12,20 @@ class User
   field :last_name
   field :cards
   field :is_exempt, :type => Boolean
-  field :department
   key :first_name, :last_name
   # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
   validates_presence_of :login
   validates_uniqueness_of :login, :case_sensitive => false
-  attr_accessible :first_name, :last_name, :email, :login, :is_exempt, :department, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :login, :is_exempt, :password, :password_confirmation
  
   # Assocations :::::::::::::::::::::::::::::::::::::::::::::::::::::
   referenced_in :department
-  embeds_many :cards do
-    def exempt
-      @target.select do |card|
-        card.isExempt == true
-      end
-    end
-    def hourly
-      @target.select do |card|
-        card.isExempt == false
-      end
-    end
+  references_many :cards
+    
+  def manager
+    @department.users.manager.first
   end
   # Callbacks ::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
   # before_create :your_model_method

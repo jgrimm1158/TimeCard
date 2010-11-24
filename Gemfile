@@ -15,9 +15,6 @@ gem 'hpricot', '0.8.2', :group => :development
 gem 'ruby_parser', '2.0.5', :group => :development
 
 
-# Add support for Authlogic authentication
-# gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => 'rails3' # TODO: test this with official version of authlogic
-
 # Add support for paperclip (used for uploading content and profile pics)
 # gem 'paperclip'
 

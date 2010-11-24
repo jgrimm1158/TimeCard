@@ -16,8 +16,6 @@ end
 
 def create_manager (first, last, dept)
   mgr = Manager.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => true, :email => first.downcase + last.downcase + "@twoamsoftware.com")
-  dept.manager = mgr
-  dept.save
 end 
  
 User.delete_all
