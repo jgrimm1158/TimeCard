@@ -40,7 +40,7 @@ class CardsController < ApplicationController
     if @card.update_attributes(params[:card])
       flash[:notice] = "Card for #{params[:week_starting]} successfully updated."
       submit() unless params[:submit].nil?
-      redirect_to :user
+      redirect_to :home
     end
   end
 

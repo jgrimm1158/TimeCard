@@ -1,10 +1,10 @@
 class ManagerController < ApplicationController
   
   def index
-    unless current_user.isManager 
+    unless current_user.class == Manager 
       redirect_to :action => :show, :controller => :users, :id => current_user.login and return
     end
-    @cards = Card.where(:isSubmitted => true, :isApproved => false, :user_id => User.where(:department_id => current_user.department).all)
+    @cards = Card.any_in(:user_id => User.where(:department_id => current_user.department.id).only(:id).execute.map(&:id)).where(:is_approved => false, :is_submitted => true)
     @weeks = @cards.all.map(&:week_starting)
   end
   

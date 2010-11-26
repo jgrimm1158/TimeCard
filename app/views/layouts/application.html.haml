@@ -11,10 +11,10 @@
 %p
   - if current_user
     - if current_user.class == Manager and not controller.controller_name == 'manager'
-      - count = Card.where(:isSubmitted => true, :isApproved => false, :user_id => User.where(:department_id => current_user.department).all).all.count
+      - count = Card.any_in(:user_id => User.where(:department_id => current_user.department.id).only(:id).execute.map(&:id)).where(:is_approved => false, :is_submitted => true).count
       - if count > 0
         - split = pluralize(count, 'card requires', 'cards require').split(' ')
-        = link_to "#{split[0]} #{split[1]}", manager_path
+        = link_to "#{split[0]} #{split[1]}", :controller => :manager
         = "#{split[2]} your approval."  
     = "Hello, #{current_user.first_name}! ("
     = link_to 'Not you?', '/users/sign_out'

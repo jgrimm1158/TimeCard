@@ -11,7 +11,8 @@ end
 
 def create_user (first, last, dept, is_exempt = true)
   user = User.create(:first_name => first, :last_name => last, :login => first.downcase, :password => 'password', :password_confirmation => 'password', :is_exempt => is_exempt, :email => "richcatalano@me.com")
-  dept.users << user
+  user.department = dept
+  user.save
 end
 
 def create_manager (first, last, dept)

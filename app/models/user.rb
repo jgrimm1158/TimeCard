@@ -25,7 +25,7 @@ class User
   references_many :cards
     
   def manager
-    @department.users.manager.first
+    Manager.find(:first, :conditions => {:department_id => self.department.id})
   end
   # Callbacks ::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
   # before_create :your_model_method

@@ -2,6 +2,7 @@ TimeCard::Application.routes.draw do |map|
   devise_for :users
 
   resources :users
+  resources :manager
   resources :cards
   resources :exempt_cards
   resources :hourly_cards

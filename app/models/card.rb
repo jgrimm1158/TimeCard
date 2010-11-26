@@ -21,20 +21,9 @@ class Card
     self.save
   end
   
-  class << self
-    
-    def need_approval
-      where :is_submitted => true, :is_approved => false
-    end
-    
-    def exempt
-        where :is_exempt => true
-    end
-    
-    def hourly
-      where :is_exempt => false
-    end
-  end
-      
+  scope :needs_approval, :where => { :is_approved => false }
+  scope :exempt, :where => { :is_exempt => true }
+  scope :hourly, :where => { :is_exempt => false }
+  
 end
                    
