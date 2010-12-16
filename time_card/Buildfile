@@ -1,0 +1,12 @@
+# ===========================================================================
+# Project:   TimeCard
+# Copyright: ©2010 My Company, Inc.
+# ===========================================================================
+
+# Add initial buildfile information here
+config :all, :required => [:sproutcore, 'sproutcore/table']
+proxy "/sign_out", :to => "localhost:3000"
+proxy "/sign_in", :to => "localhost:3000"
+proxy "/users", :to => "localhost:3000"
+proxy "/cards", :to => "localhost:3000"
+proxy "/failure", :to => "localhost:3000"
