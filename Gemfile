@@ -14,7 +14,6 @@ gem 'haml-rails', '0.3.4', :group => :development
 gem 'hpricot', '0.8.2', :group => :development
 gem 'ruby_parser', '2.0.5', :group => :development
 
-
 # Add support for paperclip (used for uploading content and profile pics)
 # gem 'paperclip'
 

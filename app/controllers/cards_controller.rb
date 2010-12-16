@@ -3,9 +3,7 @@ class CardsController < ApplicationController
 
   def index
     @cards = current_user.cards
-    respond_to do |format|
-      format.html
-    end
+    render :json => { :success => true, :cards => @cards } 
   end
   
   def new

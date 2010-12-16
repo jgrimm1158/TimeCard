@@ -15,7 +15,7 @@ class ManagerController < ApplicationController
   
   def approve
     @card = Card.find params[:id]
-    @card.isApproved = true
+    @card.is_approved = true
     @card.save
     flash[:notice] = "Card approved."
     redirect_to :action => :index

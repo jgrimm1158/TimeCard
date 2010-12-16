@@ -2,13 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:new, :create]
 
   def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.haml
-      format.xml  { render :xml => @users }
-      format.json { render :json => @users }
-    end
+    render :json => { :success => true, :user => current_user}
   end
 
   def show 

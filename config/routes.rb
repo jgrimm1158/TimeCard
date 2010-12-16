@@ -1,16 +1,22 @@
 TimeCard::Application.routes.draw do |map|
-  devise_for :users
+  devise_for :users, :controllers => {:sessions => 'auth/sessions'}, :skip => :session do
+    post 'sign_in' => 'auth/sessions#create', :as => :user_session
+    get 'users/sign_in' => 'devise/sessions#new', :as => :new_user_session
+    post 'sign_out' => 'auth/sessions#destroy', :as => :destroy_user_session
+    get 'sign_out' => 'auth/sessions#destroy', :as => :destroy_user_session
+    get 'failure' => 'auth/sessions#failure', :as => :failed_login
+  end
+
 
   resources :users
   resources :manager
   resources :cards
-  resources :exempt_cards
-  resources :hourly_cards
   
   # devise_for :users, :path_names => { :sign_up => "register", :sign_in => "/login", :sign_out => "/logout" } 
   
   get    'home(.:format)' => 'users#show', :as => :home
-
+  get    'manager/approve(.:format)' => 'manager#approve'
+  
   root :to => 'users#show' # login page
 
   # The priority is based upon order of creation:
