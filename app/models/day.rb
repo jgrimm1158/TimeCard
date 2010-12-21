@@ -1,10 +1,10 @@
 class Day
   include Mongoid::Document
   
-  embedded_in :card, :inverse_of => :days
+  referenced_in :card, :inverse_of => :days
   
   field :date, :type => Date
-  field :notes
+  field :notes, :default => ""
   field :worked, :default => "Worked"
   
   validates_uniqueness_of :date

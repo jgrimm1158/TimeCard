@@ -13,10 +13,21 @@
 TimeCard.cardsController = SC.ArrayController.create(
 /** @scope TimeCard.cardsController.prototype */ {
 
-  
-
 });
 
-TimeCard.cardController = SC.ObjectController.create({
-  contentBinding: SC.Binding.single('TimeCard.cardsController.selection')
-})
+TimeCard.currentCardController = SC.ObjectController.create({
+  contentBinding: SC.Binding.single('TimeCard.cardsController.selection'),
+  addObject: function(){
+    alert(arguments[0]);
+    sc_super();
+  }
+});
+
+TimeCard.currentDaysController = SC.ArrayController.create({
+  contentBinding: 'TimeCard.currentCardController.days',
+  
+  addObject: function(){
+    alert(arguments[0]);
+    sc_super();
+  }
+});

@@ -21,7 +21,7 @@ class User
   attr_accessible :first_name, :last_name, :email, :login, :is_exempt, :password, :password_confirmation
  
   # Assocations :::::::::::::::::::::::::::::::::::::::::::::::::::::
-  referenced_in :department
+  referenced_in :department, :inverse_of => :users
   references_many :cards
     
   def manager

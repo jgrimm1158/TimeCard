@@ -174,34 +174,14 @@ TimeCard.mainPage = SC.Page.design({
       dividerView: SC.SplitDividerView.design({
           layout: {}
       }),  
-      bottomRightView: SC.LabelView.design({
-        textAlign: SC.ALIGN_CENTER,
-        valueBinding: 'TimeCard.cardController.weekStarting'
+      bottomRightView: SC.CollectionView.design({
+        contentBinding: 'TimeCard.currentDaysController.arrangedObjects',
+        exampleView: TimeCard.ExemptDayView,
+        isEditableBinding: 'TimeCard.currentCardController.isSubmitted'
       })
     })
     
   }) //mainPane
 
 }); //mainPage
-
-
-// TimeCard.TaskJSONProxy = SC.Object.create({
-//   normalize_task_data: function(data) {
-//     var result = [];
-//     var array_name;
-//     if (data.length === undefined) {
-//       array_name = 'data.task';
-//       eval(array_name).guid = eval(array_name).id;
-//       result.push(eval(array_name));
-//     }
-//     else {
-//       for(var i=0; i<data.length; i++) {
-//         array_name = 'data[i].task';
-//         eval(array_name).guid = eval(array_name).id;
-//         result.push(eval(array_name));
-//       }
-//     }
-//     return result;
-//   } 
-// }) ;  
 

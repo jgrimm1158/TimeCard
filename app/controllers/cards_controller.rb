@@ -3,7 +3,7 @@ class CardsController < ApplicationController
 
   def index
     @cards = current_user.cards
-    render :json => { :success => true, :cards => @cards } 
+    render :json => { :success => true, :cards => @cards.to_a } 
   end
   
   def new
@@ -27,10 +27,8 @@ class CardsController < ApplicationController
   end
   
   def show
-    @card = current_user.cards.find(params[:id])
-    respond_to do |format|
-      format.html 
-    end
+    @card = current_user.cards.days.find(params[:id])
+    render :json => { :success => true, :card => @card }
   end
   
   def update

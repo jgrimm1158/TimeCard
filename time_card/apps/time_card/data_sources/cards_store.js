@@ -54,9 +54,13 @@ TimeCard.CardsStore = SC.DataSource.extend(
   
   retrieveRecord: function(store, storeKey) {
     
-    // TODO: Add handlers to retrieve an individual record's contents
     // call store.dataSourceDidComplete(storeKey) when done.
     
+    // SC.Request.getUrl('/cards/' + TimeCard.cardsStore.idFor(storeKey)._id)
+    //   .json()
+    //   .notify(this, store.dataSourceDidComplete, storeKey)
+    //   .send();   
+      console.log(TimeCard.cardsStore.idFor(storeKey));
     return NO ; // return YES if you handled the storeKey
   },
   
@@ -68,7 +72,8 @@ TimeCard.CardsStore = SC.DataSource.extend(
     return NO ; // return YES if you handled the storeKey
   },
   
-  updateRecord: function(store, storeKey) {
+  updateRecord: function(store, storeKey, id) {
+    alert("trying to update" + storeKey);
     
     // TODO: Add handlers to submit modified record to the data source
     // call store.dataSourceDidComplete(storeKey) when done.
